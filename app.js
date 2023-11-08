@@ -30,7 +30,7 @@ var usersRouter = require('./routes/users');
 var kangarooRouter = require('./routes/kangaroo');
 var boardRouter = require('./routes/board')
 var chooseRouter = require('./routes/choose');
-//var resourceRouter = require('./routes/resource')
+var resourceRouter = require('./routes/resource')
 
 var app = express();
 
@@ -49,7 +49,7 @@ app.use('/users', usersRouter);
 app.use('/kangaroo',kangarooRouter);
 app.use('/board',boardRouter);
 app.use('/choose',chooseRouter);
-//app.use('/resource',resourceRouter)
+app.use('/resource',resourceRouter)
 
 
 // catch 404 and forward to error handler
