@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1= title
-  - let results = [{k_name:"k1",k_age:30,k_jumpheight:20},{k_name:"k2",k_age:20,k_jumpheight:10},{k_name:"k3",k_age:20,k_jumpheight:30}]
+  - let items = results
    div.container-fluid
     div.row
      div.col-sm-2(onClick=`buy(${index})`) #[Strong kangaroo_name ]
@@ -10,7 +10,7 @@ block content
      div.col-sm-2(onClick=`buy(${index})`) #[strong kangaroo_jumpheight ]
      hr
      br
-     each kangaroo,index in results
+     each kangaroo,index in items
       div.col-sm-2(onClick=`buy(${index})`) #{kangaroo.k_name}
       div.col-sm-2(onClick=`buy(${index})`) #{kangaroo.k_age}
       div.col-sm-2(onClick=`buy(${index})`) #{kangaroo.k_jumpheight}

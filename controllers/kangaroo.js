@@ -26,3 +26,18 @@ res.send('NOT IMPLEMENTED: kangaroo delete DELETE ' + req.params.id);
 exports.kangaroo_update_put = function(req, res) {
 res.send('NOT IMPLEMENTED: kangaroo update PUT' + req.params.id);
 };
+
+
+//Part 6 Page to Display All
+// VIEWS
+// Handle a show all view
+exports.kangaroo_view_all_Page = async function(req, res) {
+    try{
+    theKangaroo = await kangaroo.find();
+    res.render('kangaroo', { title: 'kangaroo Search Results', results: theKangaroo });
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+    };
