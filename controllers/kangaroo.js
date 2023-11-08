@@ -1,7 +1,14 @@
 var kangaroo = require('../models/kangaroo');
 // List of all kangaroo
-exports.kangaroo_list = function(req, res) {
-res.send('NOT IMPLEMENTED: kangaroo list');
+exports.kangaroo_list = async function(req, res) {
+try{
+theKangaroo = await kangaroo.find();
+res.send(theKangaroo);
+}
+catch(err){
+res.status(500);
+res.send(`{"error": ${err}}`);
+}
 };
 // for a specific kangaroo.
 exports.kangaroo_detail = function(req, res) {
