@@ -2,6 +2,8 @@ extends layout
 
 block content
   h1= title
+  div(style='text-align: right;')
+   button(type='button' class="btn btn-success") Add New Instance
   - let items = results
    div.container-fluid
     div.row
@@ -14,6 +16,12 @@ block content
       div.col-sm-2(onClick=`buy(${index})`) #{kangaroo.k_name}
       div.col-sm-2(onClick=`buy(${index})`) #{kangaroo.k_age}
       div.col-sm-2(onClick=`buy(${index})`) #{kangaroo.k_jumpheight}
+      div(style='text-align: right;')
+       button(type='button' class="btn btn-success") Save
+       button(type='button' class="btn btn-success") Ok
+       button(type='button' class="btn btn-success") update
+       button(type='button' class="btn btn-success") delete 
+
       br
       hr
 
