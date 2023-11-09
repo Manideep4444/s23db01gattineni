@@ -47,7 +47,7 @@ res.send('NOT IMPLEMENTED: kangaroo update PUT' + req.params.id);
 exports.kangaroo_view_all_Page = async function(req, res) {
     try{
     theKangaroo = await kangaroo.find();
-    res.render('kangaroo', { title: 'kangaroo Search Results', results: theKangaroo });
+    res.render('Kangaroo', { title: 'kangaroo Search Results', results: theKangaroo });
     }
     catch(err){
     res.status(500);
