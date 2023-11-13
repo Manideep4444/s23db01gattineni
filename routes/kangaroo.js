@@ -13,4 +13,7 @@ router.get('/', kangaroo_controlers.kangaroo_view_all_Page );
 /* GET detail costume page */
 router.get('/detail', kangaroo_controlers.kangaroo_view_one_Page);
 
+/* GET create kangaroo page */
+router.get('/create', kangaroo_controlers.kangaroo_create_Page);
+
 module.exports = router;

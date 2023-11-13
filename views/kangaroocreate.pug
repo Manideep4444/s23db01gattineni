@@ -1,0 +1,28 @@
+extends layout
+block content
+ h1= title
+ form(id='kangarooForm', action="/resource/kangaroo", method="POST")
+  div.form-group
+   label.kangarooAttr(for='k_name') kangaroo name
+   input#k_name(type='text', name='k_name')
+  div.form-group
+   label.kangarooAttr(for='k_age') kangaroo age
+   input#k_age(type='number', name='k_age')
+  div.form-group
+   label.kangarooAttr(for='k_jumpheight') kangaroo jumpheight
+   input#k_jumpheight(type='number', name='k_jumpheight')
+  input(type="submit")
+ script.
+  document.forms['kangarooForm'].addEventListener('submit', (event) => {
+    event.preventDefault();
+    fetch(event.target.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(event.target)) 
+    }).then((resp) => {
+        return resp.json();
+    }).then((body) => {
+        alert("Save succeded")
+    }).catch((error) => {
+        alert("Save failed " + error )
+    });
+   });

@@ -54,6 +54,20 @@ res.send('NOT IMPLEMENTED: kangaroo update PUT' + req.params.id);
 };
 
 
+// Handle building the view for creating a costume.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.kangaroo_create_Page = function(req, res) {
+    console.log("create view")
+    try{
+    res.render('kangaroocreate', { title: 'kangaroo Create'});
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+
 //Part 6 Page to Display All
 // VIEWS
 // Handle a show all view
