@@ -34,7 +34,7 @@ res.send('NOT IMPLEMENTED: kangaroo create POST');
 
 
 
-// Handle Costume delete on DELETE.
+// Handle kangaroo delete on DELETE.
 exports.kangaroo_delete = async function(req, res) {
     console.log("delete " + req.params.id)
     try {
@@ -71,14 +71,14 @@ exports.kangaroo_view_all_Page = async function(req, res) {
 
 
 /*
-    // Handle Costume create on POST.
+    // Handle kangaroo create on POST.
 exports.kangaroo_create_post = async function(req, res) {
     console.log(req.body)
     let document = new kangaroo();
     // We are looking for a body, since POST does not have query parameters.
     // Even though bodies can be in many different formats, we will be picky
     // and require that it be a json object
-    // {"costume_type":"goat", "cost":12, "size":"large"}
+    // {"kangaroo_type":"goat", "cost":12, "size":"large"}
     document.k_name = req.body.k_name;
     document.k_cost = req.body.k_age;
     document.k_size = req.body.k_jumpheight;
@@ -93,14 +93,14 @@ exports.kangaroo_create_post = async function(req, res) {
     };
     */
 
-    // Handle Costume create on POST.
+    // Handle kangaroo create on POST.
 exports.kangaroo_create_post = async function(req, res) {
     console.log(req.body)
     let document = new kangaroo();
     // We are looking for a body, since POST does not have query parameters.
     // Even though bodies can be in many different formats, we will be picky
     // and require that it be a json object
-    // {"costume_type":"goat", "cost":12, "size":"large"}
+    // {"kangaroo_type":"goat", "cost":12, "size":"large"}
     document.k_name = req.body.k_name;
     document.k_age = req.body.k_age;
     document.k_jumpheight = req.body.k_jumpheight;
@@ -113,3 +113,19 @@ exports.kangaroo_create_post = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
     };
+
+
+
+    // Handle a show one view with id specified by query
+exports.kangaroo_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+    result = await kangaroo.findById( req.query.id)
+    res.render('kangaroodetail',
+   { title: 'kangaroo Detail', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };

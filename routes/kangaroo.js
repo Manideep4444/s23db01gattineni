@@ -9,4 +9,8 @@ router.get('/', function(req, res, next) {
 const kangaroo_controlers= require('../controllers/kangaroo');
 
 router.get('/', kangaroo_controlers.kangaroo_view_all_Page );
+
+/* GET detail costume page */
+router.get('/detail', kangaroo_controlers.kangaroo_view_one_Page);
+
 module.exports = router;
