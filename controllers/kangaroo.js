@@ -10,11 +10,23 @@ res.status(500);
 res.send(`{"error": ${err}}`);
 }
 };
+/*
 // for a specific kangaroo.
 exports.kangaroo_detail = function(req, res) {
 res.send('NOT IMPLEMENTED: kangaroo detail: ' + req.params.id);
 };
-
+*/
+exports.kangaroo_detail = async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+    result = await kangaroo.findById( req.params.id)
+    res.send(result)
+    } catch (error) {
+    res.status(500)
+    res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+   };
+   
 
 
 /*
@@ -47,14 +59,35 @@ exports.kangaroo_delete = async function(req, res) {
     }
    };
 
-
+/*
 // Handle kangaroo update form on PUT.
 exports.kangaroo_update_put = function(req, res) {
-res.send('NOT IMPLEMENTED: kangaroo update PUT' + req.params.id);
+res.send('kat NOT IMPLEMENTED: kangaroo update PUT' + req.params.id);
+};*/
+
+
+// Handle Costume update form on PUT.
+exports.kangaroo_update_put = async function(req, res) {
+ console.log(`update on id ${req.params.id} with body 
+${JSON.stringify(req.body)}`)
+ try {
+ let toUpdate = await kangaroo.findById( req.params.id)
+ // Do updates of properties
+ if(req.body.k_name) 
+ toUpdate.k_name = req.body.k_name;
+ if(req.body.k_age) toUpdate.k_age = req.body.k_age;
+ if(req.body.k_jumpheight) toUpdate.k_jumpheight = req.body.k_jumpheight;
+ let result = await toUpdate.save();
+ console.log("Sucess " + result)
+ res.send(result)
+ } catch (err) {
+ res.status(500)
+ res.send(`{"error": ${err}: Update for id ${req.params.id} 
+failed`);
+ }
 };
 
-
-// Handle building the view for creating a costume.
+// Handle building the view for creating a kangaroo.
 // No body, no in path parameter, no query.
 // Does not need to be async
 exports.kangaroo_create_Page = function(req, res) {
@@ -137,6 +170,21 @@ exports.kangaroo_view_one_Page = async function(req, res) {
     result = await kangaroo.findById( req.query.id)
     res.render('kangaroodetail',
    { title: 'kangaroo Detail', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+
+
+   // Handle building the view for updating a kangaroo.
+// query provides the id
+exports.kangaroo_update_Page = async function(req, res) {
+    console.log("update view for item "+req.query.id)
+    try{
+    let result = await kangaroo.findById(req.query.id)
+    res.render('kangarooupdate', { title: 'kangaroo Update', toShow: result });
     }
     catch(err){
     res.status(500)

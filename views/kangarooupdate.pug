@@ -1,0 +1,36 @@
+extends layout
+block content
+ h1= title
+ - let kangarooid = toShow._id
+ - let k_name = toShow.k_name
+ - let k_age = toShow.k_age
+ - let k_jumpheight = toShow.k_jumpheight
+ div.row(class='mb-2')
+ div.mr-1 ID is
+ div #{kangarooid}
+ - let actionid = "/resource/kangaroo/" + kangarooid
+ form(id='kangarooForm', action=actionid, method="PUT")
+  div.form-group
+   label.kangarooAttr(for='k_name') kangaroo name
+   input#k_name(type='text', name='k_name',value=k_name)
+  div.form-group
+   label.kangarooAttr(for='k_age') kangaroo age
+   input#k_age(type='number', name='k_age',value=k_age)
+  div.form-group
+   label.kangarooAttr(for='k_jumpheight') kangaroo jumpheight
+   input#k_jumpheight(type='number', name='k_jumpheight',value=k_jumpheight)
+  input(type="submit")
+ script.
+  document.forms['kangarooForm'].addEventListener('submit', (event) => {
+    event.preventDefault();
+    fetch(event.target.action, {
+        method: 'PUT',
+        body: new URLSearchParams(new FormData(event.target)) 
+    }).then((resp) => {
+        return resp.json();
+    }).then((body) => {
+        alert("Save succeded")
+    }).catch((error) => {
+        alert("Save failed " + error )
+    });
+   });

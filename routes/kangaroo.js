@@ -16,4 +16,10 @@ router.get('/detail', kangaroo_controlers.kangaroo_view_one_Page);
 /* GET create kangaroo page */
 router.get('/create', kangaroo_controlers.kangaroo_create_Page);
 
+
+
+/* GET create update page */
+router.get('/update', kangaroo_controlers.kangaroo_update_Page);
+
+
 module.exports = router;
