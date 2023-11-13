@@ -31,10 +31,23 @@ res.send('NOT IMPLEMENTED: kangaroo create POST');
 
 
 
-// Handle kangaroo delete form on DELETE.
-exports.kangaroo_delete = function(req, res) {
-res.send('NOT IMPLEMENTED: kangaroo delete DELETE ' + req.params.id);
-};
+
+
+
+// Handle Costume delete on DELETE.
+exports.kangaroo_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await kangaroo.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+   };
+
+
 // Handle kangaroo update form on PUT.
 exports.kangaroo_update_put = function(req, res) {
 res.send('NOT IMPLEMENTED: kangaroo update PUT' + req.params.id);
