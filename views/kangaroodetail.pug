@@ -1,20 +1,23 @@
 extends layout
 block content
  h1= title
- - let kangarooid = toShow._id
- - let kangaroo_name = toShow.k_name
- - let kangarooage = toShow.k_age
- - let kangarooheight = toShow.k_jumpheight
- div
- div.row
- div(class='kangarooAttr mr-3') kangaroo ID is:
- div #{kangarooid}
- div.row
- div(class='kangarooAttr mr-3') kangaroo Type is:
- div #{kangaroo_name}
- div.row
- div(class='kangarooAttr mr-3') kangaroo Size is:
- div #{kangarooage}
- div.row
- div(class='kangarooAttr mr-3') kangaroo Cost is:
- div #{kangarooheight}
+ if(toShow == null)
+    h2 No instance to toshow
+ else
+  - let kangarooid = toShow._id
+  - let kangaroo_name = toShow.k_name
+  - let kangarooage = toShow.k_age
+  - let kangarooheight = toShow.k_jumpheight
+  div
+  div.row
+  div(class='kangarooAttr mr-3') kangaroo ID is:
+  div #{kangarooid}
+  div.row
+  div(class='kangarooAttr mr-3') kangaroo Type is:
+  div #{kangaroo_name}
+  div.row
+  div(class='kangarooAttr mr-3') kangaroo Size is:
+  div #{kangarooage}
+  div.row
+  div(class='kangarooAttr mr-3') kangaroo Cost is:
+  div #{kangarooheight}
