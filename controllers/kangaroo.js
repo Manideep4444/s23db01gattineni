@@ -66,7 +66,7 @@ res.send('kat NOT IMPLEMENTED: kangaroo update PUT' + req.params.id);
 };*/
 
 
-// Handle Costume update form on PUT.
+// Handle kangaroo update form on PUT.
 exports.kangaroo_update_put = async function(req, res) {
  console.log(`update on id ${req.params.id} with body 
 ${JSON.stringify(req.body)}`)
@@ -185,6 +185,23 @@ exports.kangaroo_update_Page = async function(req, res) {
     try{
     let result = await kangaroo.findById(req.query.id)
     res.render('kangarooupdate', { title: 'kangaroo Update', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+
+
+
+
+   // Handle a delete one view with id from query
+exports.kangaroo_delete_Page = async function(req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try{
+    result = await kangaroo.findById(req.query.id)
+    res.render('kangaroodelete', { title: 'kangaroo Delete', toShow: 
+   result });
     }
     catch(err){
     res.status(500)
