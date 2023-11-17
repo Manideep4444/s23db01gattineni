@@ -2,9 +2,14 @@ extends layout
 
 block content
   h1= title
-  div(style='text-align: right;')
-   button(type='button' class="btn btn-success") Add New Instance
+
   - let items = results
+  div(class="container-fluid")
+   div(class="row m-1")
+    each item in items
+     - let destination = `dispatch(\"/kangaroo/update?id=${item._id}\")`
+     div(class="row-sm-2", class="m-1") Item #{item.k_name}(#{item.k_age}) is #{item.k_jumpheight}
+      button.btn( class="btn-primary ml-1", onclick= destination) Update
    div.container-fluid
     div.row
      div.col-sm-2(onClick=`buy(${index})`) #[Strong kangaroo_name ]
@@ -16,12 +21,6 @@ block content
       div.col-sm-2(onClick=`buy(${index})`) #{kangaroo.k_name}
       div.col-sm-2(onClick=`buy(${index})`) #{kangaroo.k_age}
       div.col-sm-2(onClick=`buy(${index})`) #{kangaroo.k_jumpheight}
-      div(style='text-align: right;')
-       button(type='button' class="btn btn-success") Save
-       button(type='button' class="btn btn-success") Ok
-       button(type='button' class="btn btn-success") update
-       button(type='button' class="btn btn-success") delete 
-
       br
       hr
 
@@ -30,3 +29,7 @@ block content
         {
             alert(`You purchased Item ${index+1}`)
         }
+  script.
+   function dispatch(path){
+    window.location.href=path
+   }
