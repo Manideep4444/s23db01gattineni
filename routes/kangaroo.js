@@ -10,19 +10,29 @@ const kangaroo_controlers= require('../controllers/kangaroo');
 
 router.get('/', kangaroo_controlers.kangaroo_view_all_Page );
 
-/* GET detail costume page */
+/* GET detail kangaroo page */
 router.get('/detail', kangaroo_controlers.kangaroo_view_one_Page);
 
 /* GET create kangaroo page */
 router.get('/create', kangaroo_controlers.kangaroo_create_Page);
 
-
+// A little function to check if we have an authorized user and continue on
+//or
+// redirect to login.
+const secured = (req, res, next) => {
+ if (req.user){
+ return next();
+ }
+ res.redirect("/login");
+ }
 
 /* GET create update page */
-router.get('/update', kangaroo_controlers.kangaroo_update_Page);
+router.get('/update', secured, kangaroo_controlers.kangaroo_update_Page);
 
 /* GET delete kangaroo page */
 router.get('/delete', kangaroo_controlers.kangaroo_delete_Page);
+
+
 
 
 module.exports = router;
