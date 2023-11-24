@@ -4,12 +4,19 @@ block content
   h1= title
 
   - let items = results
+  - let create = `createInstance(\"/kangaroo/create\")`
+  div(style='text-align: right;')
+   button(type='button' class="btn btn-success",onClick=create) Add New Instance
   div(class="container-fluid")
    div(class="row m-1")
     each item in items
      - let destination = `dispatch(\"/kangaroo/update?id=${item._id}\")`
-     div(class="row-sm-2", class="m-1") Item #{item.k_name}(#{item.k_age}) is #{item.k_jumpheight}
+     - let detail = `detailInstance(\"/kangaroo/detail?id=${item._id}"\)`
+     - let deleteins = `deleteInstance(\"/kangaroo/delete?id=${item._id}"\)`
+     div(class="row-sm-2", class="m-2") Item #{item.k_name}(#{item.k_age}) is #{item.k_jumpheight}
       button.btn( class="btn-primary ml-1", onclick= destination) Update
+      button.btn(class="btn-success ml-1",onclick=detail) Details
+      button.btn(class="btn-info ml-1",onclick= deleteins) DeleteKangaroo
    div.container-fluid
     div.row
      div.col-sm-2(onClick=`buy(${index})`) #[Strong kangaroo_name ]
@@ -31,5 +38,17 @@ block content
         }
   script.
    function dispatch(path){
+    window.location.href=path
+   }
+  script.
+   function createInstance(path){
+    window.location.href=path
+   }
+  script.
+   function detailInstance(path){
+    window.location.href=path
+   }
+  script.
+   function deleteInstance(path){
     window.location.href=path
    }
